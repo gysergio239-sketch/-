@@ -196,7 +196,7 @@ function App() {
   }
   return <div ref={page} className="page">
     <header ref={navigation} className="nav shell">
-      <a className="wordmark" href="#home" aria-label="返回首页">FRAME<span>®</span></a>
+      <a className="wordmark" href="#home" aria-label="返回首页">TUTU</a>
       <nav aria-label="主导航"><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">我的优势</a></nav>
       <a className="contact-link" href="#contact">聊聊合作 <span>↗</span></a>
     </header>
@@ -220,7 +220,12 @@ function App() {
           <div className="portrait image-reveal parallax-image"><img src={`${base}media/portrait-phone.jpg`} alt="打电话的个人卡通形象" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
           <div className="about-copy"><p className="tiny accent motion-support">短视频编导 / 短视频运营</p><h2 className="motion-title">好的内容，<br />始于观察。<br /><span className="muted">也成于执行。</span></h2><p className="body-copy motion-support">我关注内容的表达，也关注内容被看见的方式。<br />从选题策划、脚本分镜到剪辑呈现，连接创意与执行，让想法成为可以被感受到的作品。</p><p className="draft-note motion-support">个人简介草稿 · 工作经历与任职时间待补充</p><a className="text-link animated-fill motion-support" href="#contact">进一步认识我 <span>↗</span></a></div>
         </div>
-        <div className="stats">{[['04',' / FILMS','本次收录作品'],['—',' / YEARS','从业年限 · 待补充'],['—',' / VIEWS','累计播放量 · 待补充'],['—',' / CONTACT','邮箱 / 微信 · 待补充']].map(([value, unit, label]) => <div className="motion-card" key={unit}><strong>{value}<span>{unit}</span></strong><p>{label}</p></div>)}</div>
+        <div className="stats">{[
+          { value: '04', unit: ' / FILMS', label: '本次收录作品' },
+          { value: '5', unit: ' / YEARS', label: '从业年限' },
+          { value: '100W+', unit: ' / VIEWS', label: '累计播放量' },
+          { value: '3079301714@QQ.COM', unit: ' / CONTACT', label: '18064578010', compact: true },
+        ].map(({ value, unit, label, compact }) => <div className={`motion-card${compact ? ' stat-contact' : ''}`} key={unit}><strong>{value}<span>{unit}</span></strong><p>{label}</p></div>)}</div>
       </section>
 
       <section className="work section shell motion-section" id="work">
@@ -243,8 +248,8 @@ function App() {
         <div className="section-label"><span>04 / LET’S CONNECT</span><span>下一个好作品，从一次交流开始。</span></div>
         <p className="contact-lead motion-support">你有想法，<span className="muted">我们就有故事可讲。</span></p>
         <h2 className="motion-title">LET’S MAKE<br /><span>SOMETHING</span><br /><em>MATTER.</em><span className="contact-arrow">↗</span></h2>
-        <div className="contact-details motion-support"><span>合作咨询 / 项目交流</span><div><p>邮箱 <span>待补充</span></p><p>微信 <span>待补充</span></p></div><a className="animated-fill" href="#home">回到顶部 ↑</a></div>
-        <footer><a className="wordmark" href="#home">FRAME<span>®</span></a><span>短视频编导 · 短视频运营</span><span>PERSONAL PORTFOLIO / 2026</span></footer>
+        <div className="contact-details motion-support"><span>合作咨询 / 项目交流</span><div><p>邮箱 <a href="mailto:3079301714@qq.com">3079301714@qq.com</a></p><p>微信 <span>18064578010</span></p></div><a className="animated-fill" href="#home">回到顶部 ↑</a></div>
+        <footer><a className="wordmark" href="#home">TUTU</a><span>短视频编导 · 短视频运营</span><span>PERSONAL PORTFOLIO / 2026</span></footer>
       </div></section>
     </main>
     {selected !== null && <dialog ref={dialog} className="video-dialog" onCancel={closeVideo} onClick={event => { if (event.target === dialog.current) closeVideo(); }}><div className="dialog-content"><div className="dialog-heading"><span>{projects[selected].category}</span><button onClick={closeVideo} autoFocus aria-label="关闭视频">关闭 ×</button></div><video src={`${base}media/${projects[selected].file}`} controls autoPlay playsInline /><p>{projects[selected].name}</p></div></dialog>}
