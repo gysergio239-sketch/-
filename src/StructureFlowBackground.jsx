@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createStructureFlowRenderer, STRUCTURE_FLOW_DEFAULTS } from './structureFlowRenderer';
 
 export function StructureFlowBackground(props) {
