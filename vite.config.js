@@ -2,5 +2,12 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   base: './',
-  build: { outDir: 'docs' },
+  build: {
+    outDir: 'docs',
+    rollupOptions: {
+      output: {
+        manualChunks: { three: ['three'] },
+      },
+    },
+  },
 });

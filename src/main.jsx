@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { StructureFlowBackground } from './StructureFlowBackground';
 import './style.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,17 +23,9 @@ const abilities = [
 
 function App() {
   const [selected, setSelected] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  const hero = useRef(null);
   const dialog = useRef(null);
   const page = useRef(null);
   const navigation = useRef(null);
-  const particleCanvas = useRef(null);
-  useEffect(() => {
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      hero.current.play().catch(() => setPlaying(false));
-    }
-  }, []);
   useEffect(() => {
     if (selected === null) return;
     dialog.current.showModal();
@@ -49,7 +42,7 @@ function App() {
     const ctx = gsap.context(() => {
       const opening = gsap.timeline({ defaults: { ease: 'expo.out' } });
       opening
-        .fromTo('.hero-video', { autoAlpha: 0, scale: 1.04 }, { autoAlpha: 1, scale: 1, duration: 1 }, 0)
+        .fromTo('.structure-flow-background', { autoAlpha: 0, scale: 1.04 }, { autoAlpha: 1, scale: 1, duration: 1 }, 0)
         .fromTo('.hero-title-line', { y: 80, scale: 1.1, letterSpacing: '0.015em' }, { y: 0, scale: 1, letterSpacing: '-0.065em', duration: 1.35, stagger: 0.15 }, 0.35)
         .fromTo('.hero-intro', { y: 42, autoAlpha: 0, clipPath: 'inset(100% 0 0 0)' }, { y: 0, autoAlpha: 1, clipPath: 'inset(0% 0 0 0)', duration: 1 }, 0.95)
         .fromTo('.hero-left', { x: -60, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 1.05 }, 1.25)
@@ -114,10 +107,8 @@ function App() {
     const onVisibility = () => {
       if (document.hidden) {
         gsap.globalTimeline.pause();
-        hero.current?.pause();
       } else {
         gsap.globalTimeline.resume();
-        hero.current?.play().catch(() => setPlaying(false));
         ScrollTrigger.refresh();
       }
     };
@@ -129,71 +120,7 @@ function App() {
       ctx.revert();
     };
   }, []);
-
-  useEffect(() => {
-    const canvas = particleCanvas.current;
-    if (!canvas) return undefined;
-    const context = canvas.getContext('2d');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const particleCount = 68;
-    let width = 0;
-    let height = 0;
-    let frame;
-    let active = !document.hidden;
-    let particles = [];
-
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      particles = Array.from({ length: particleCount }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 1.15 + .25,
-        speed: reducedMotion ? 0 : Math.random() * .12 + .025,
-        drift: (Math.random() - .5) * .045,
-        alpha: Math.random() * .45 + .12,
-      }));
-    };
-    const draw = () => {
-      if (!active) return;
-      context.clearRect(0, 0, width, height);
-      particles.forEach((particle) => {
-        particle.y -= particle.speed;
-        particle.x += particle.drift;
-        if (particle.y < -4) particle.y = height + 4;
-        if (particle.x < -4) particle.x = width + 4;
-        if (particle.x > width + 4) particle.x = -4;
-        context.beginPath();
-        context.fillStyle = `rgba(238,234,226,${particle.alpha})`;
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fill();
-      });
-      frame = requestAnimationFrame(draw);
-    };
-    const onVisibility = () => {
-      active = !document.hidden;
-      cancelAnimationFrame(frame);
-      if (active) draw();
-    };
-    resize();
-    draw();
-    window.addEventListener('resize', resize);
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('resize', resize);
-      document.removeEventListener('visibilitychange', onVisibility);
-    };
-  }, []);
   function closeVideo() { dialog.current.close(); setSelected(null); }
-  function toggleHero() {
-    if (hero.current.paused) hero.current.play().catch(() => setPlaying(false));
-    else hero.current.pause();
-  }
   return <div ref={page} className="page">
     <header ref={navigation} className="nav shell">
       <a className="wordmark" href="#home" aria-label="返回首页">TUTU</a>
@@ -202,14 +129,13 @@ function App() {
     </header>
     <main>
       <section className="hero" id="home">
-        <video ref={hero} className="hero-video" src={`${base}media/hero.mp4`} poster={`${base}media/vlog.jpg`} muted loop playsInline preload="metadata" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
+        <StructureFlowBackground speed={1} pointSize={0.08} opacity={0.4} maskStart={0.2} maskSolid={0.5} />
         <div className="hero-shade" />
-        <canvas ref={particleCanvas} className="particle-canvas" aria-hidden="true" />
         <div className="hero-content shell">
           <div className="hero-topline"><span className="tiny">INDEPENDENT CREATIVE PORTFOLIO</span><span>短视频编导 · 短视频运营</span></div>
           <div className="hero-intro"><span className="record-dot" /> 用影像讲故事，让内容被看见。</div>
           <h1><span className="title-mask"><span className="hero-title-line">MAKE IT</span></span><span className="title-mask hero-second"><span className="hero-title-line">MATTER<span className="accent">.</span></span></span></h1>
-          <div className="hero-bottom"><a className="hero-left animated-fill" href="#work">探索我的作品 <span>↓</span></a><p className="hero-center">从一个想法，到一次共鸣。<br />让每一帧，都有它的意义。</p><button className="hero-right" onClick={toggleHero} aria-label={playing ? '暂停背景视频' : '播放背景视频'}>{playing ? 'Ⅱ 暂停影像' : '▷ 播放影像'}</button></div>
+          <div className="hero-bottom"><a className="hero-left animated-fill" href="#work">探索我的作品 <span>↓</span></a><p className="hero-center">从一个想法，到一次共鸣。<br />让每一帧，都有它的意义。</p></div>
         </div>
       </section>
       <div className="index-bar shell"><span>STRATEGY. STORY. IMPACT.</span><span>策划 / 编导 / 剪辑 / 运营</span><span>SCROLL TO EXPLORE ↓</span></div>
