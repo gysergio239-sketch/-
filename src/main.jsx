@@ -60,7 +60,7 @@ function App() {
       <section className="about section shell" id="about">
         <div className="section-label"><span>01 / ABOUT ME</span><span>内容背后的人</span></div>
         <div className="about-layout">
-          <div className="portrait"><img src={`${base}media/portrait-real.png`} alt="个人真人照片" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
+          <div className="portrait"><img src={`${base}media/portrait-phone.jpg`} alt="打电话的个人卡通形象" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
           <div className="about-copy"><p className="tiny accent">短视频编导 / 短视频运营</p><h2>好的内容，<br />始于观察。<br /><span className="muted">也成于执行。</span></h2><p className="body-copy">我关注内容的表达，也关注内容被看见的方式。<br />从选题策划、脚本分镜到剪辑呈现，连接创意与执行，让想法成为可以被感受到的作品。</p><p className="draft-note">个人简介草稿 · 工作经历与任职时间待补充</p><a className="text-link" href="#contact">进一步认识我 <span>↗</span></a></div>
         </div>
         <div className="stats"><div><strong>04<span> / FILMS</span></strong><p>本次收录作品</p></div><div><strong>—<span> / YEARS</span></strong><p>从业年限 · 待补充</p></div><div><strong>—<span> / VIEWS</span></strong><p>累计播放量 · 待补充</p></div><div><strong>—<span> / CONTACT</span></strong><p>邮箱 / 微信 · 待补充</p></div></div>
