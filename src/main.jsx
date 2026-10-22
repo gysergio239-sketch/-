@@ -143,7 +143,7 @@ function App() {
       <section className="about section shell motion-section" id="about">
         <div className="section-label"><span>01 / ABOUT ME</span><span>内容背后的人</span></div>
         <div className="about-layout">
-          <div className="portrait image-reveal parallax-image"><img src={`${base}media/portrait-phone-3d.png`} alt="打电话的个人3D卡通形象" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
+          <div className="portrait image-reveal parallax-image"><img src={`${base}media/portrait-phone-3d-v2.png`} alt="打电话的个人3D卡通形象" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
           <div className="about-copy"><p className="tiny accent motion-support">短视频编导 / 短视频运营</p><h2 className="motion-title">好的内容，<br />始于观察。<br /><span className="muted">也成于执行。</span></h2><p className="body-copy motion-support">我关注内容的表达，也关注内容被看见的方式。<br />从选题策划、脚本分镜到剪辑呈现，连接创意与执行，让想法成为可以被感受到的作品。</p><p className="draft-note motion-support">个人简介草稿 · 工作经历与任职时间待补充</p><a className="text-link animated-fill motion-support" href="#contact">进一步认识我 <span>↗</span></a></div>
         </div>
         <div className="stats">{[
