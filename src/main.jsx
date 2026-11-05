@@ -9,17 +9,43 @@ gsap.registerPlugin(ScrollTrigger);
 
 const base = import.meta.env.BASE_URL;
 const projects = [
-  { name: '日常，也值得被记录。', category: 'VLOG / 生活影像', file: 'vlog.mp4', cover: 'vlog.jpg', description: '从生活的细节出发，在镜头与节奏之间，留下真实的情绪。' },
-  { name: '让每一拍，都有记忆点。', category: 'RHYTHM / 快闪卡点', file: '快闪卡点.mp4', cover: 'rhythm.jpg', description: '画面、音乐、节奏，在短时间内建立鲜明的视觉印象。' },
-  { name: '把卖点，讲进需求里。', category: 'COMMERCIAL / 信息流带货', file: '信息流带货.mp4', cover: 'commercial.jpg', description: '围绕产品与使用场景组织内容，让表达清楚，让价值可见。' },
-  { name: '探索内容表达的新方式。', category: 'AI CONTENT / 数字人口播', file: 'digital-web.mp4', cover: 'digital.jpg', description: '将数字人融入视频表达，探索更高效的内容制作流程。' },
+  { name: '这次不是理性消费的时候！！！', category: 'VIDEO / 01', file: 'work-01.mp4', cover: 'work-01.jpg', description: '短视频作品 · 原片 01' },
+  { name: 'VID_482', category: 'VIDEO / 02', file: 'work-02.mp4', cover: 'work-02.jpg', description: '短视频作品 · 原片 VID_482.mp4' },
+  { name: 'VID_483', category: 'VIDEO / 03', file: 'work-03.mp4', cover: 'work-03.jpg', description: '短视频作品 · 原片 VID_483.mp4' },
+  { name: 'VID_484', category: 'VIDEO / 04', file: 'work-04.mp4', cover: 'work-04.jpg', description: '短视频作品 · 原片 VID_484.mp4' },
+  { name: 'VID_485', category: 'VIDEO / 05', file: 'work-05.mp4', cover: 'work-05.jpg', description: '短视频作品 · 原片 VID_485.mp4' },
+  { name: 'VID_491', category: 'VIDEO / 06', file: 'work-06.mp4', cover: 'work-06.jpg', description: '短视频作品 · 原片 VID_491.mp4' },
+  { name: 'VID_492', category: 'VIDEO / 07', file: 'work-07.mp4', cover: 'work-07.jpg', description: '短视频作品 · 原片 VID_492.mp4' },
+  { name: 'VID_493', category: 'VIDEO / 08', file: 'work-08.mp4', cover: 'work-08.jpg', description: '短视频作品 · 原片 VID_493.mp4' },
+  { name: 'VID_494', category: 'VIDEO / 09', file: 'work-09.mp4', cover: 'work-09.jpg', description: '短视频作品 · 原片 VID_494.mp4' },
+  { name: 'VID_495', category: 'VIDEO / 10', file: 'work-10.mp4', cover: 'work-10.jpg', description: '短视频作品 · 原片 VID_495.mp4' },
 ];
+
+function getFanStyle(index, total) {
+  const center = (total - 1) / 2;
+  const offset = (index - center) / center;
+  return {
+    '--fan-angle': `${offset * 11}deg`,
+    '--fan-x': `${offset * 82}%`,
+    '--fan-y': `${Math.abs(offset) * 28}px`,
+    '--fan-open-x': `${offset * 228}%`,
+    '--fan-open-angle': `${offset * 2.2}deg`,
+    '--fan-depth': Math.round(total - Math.abs(index - center)),
+  };
+}
 const abilities = [
   ['01', '内容策划', '从选题，到一句有用的表达。', '账号定位 / 选题方向 / 脚本结构'],
   ['02', '影像编导', '把文字里的想法，变成画面。', '分镜设计 / 拍摄执行 / 叙事节奏'],
   ['03', '短视频运营', '让内容发布，成为下一步的起点。', '内容规划 / 数据复盘 / 迭代优化'],
   ['04', '后期与 AI 创作', '让工具，服务于内容本身。', '剪辑包装 / 音画设计 / AI 工作流'],
 ];
+
+function SectionAtmosphere({ cover, label }) {
+  return <div className="section-atmosphere" aria-hidden="true">
+    <img src={`${base}media/${cover}`} alt="" loading="lazy" />
+    <span>{label}</span>
+  </div>;
+}
 
 function App() {
   const [selected, setSelected] = useState(null);
@@ -80,6 +106,14 @@ function App() {
       });
 
       if (!isMobile) {
+        gsap.utils.toArray('.section-atmosphere img').forEach((image) => {
+          gsap.fromTo(image, { yPercent: -6 }, {
+            yPercent: 6,
+            ease: 'none',
+            scrollTrigger: { trigger: image.parentElement, start: 'top bottom', end: 'bottom top', scrub: 2.2 },
+          });
+        });
+
         gsap.utils.toArray('.parallax-image img').forEach((image) => {
           gsap.fromTo(image, { yPercent: -5 }, {
             yPercent: 5,
@@ -140,37 +174,45 @@ function App() {
       </section>
       <div className="index-bar shell"><span>STRATEGY. STORY. IMPACT.</span><span>策划 / 编导 / 剪辑 / 运营</span><span>SCROLL TO EXPLORE ↓</span></div>
 
-      <section className="about section shell motion-section" id="about">
+      <section className="about section shell motion-section cinematic-section" id="about" data-chapter="01">
         <div className="section-label"><span>01 / ABOUT ME</span><span>内容背后的人</span></div>
         <div className="about-layout">
-          <div className="portrait image-reveal parallax-image"><img src={`${base}media/portrait-phone-3d-v2.png`} alt="打电话的个人3D卡通形象" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
+          <div className="portrait image-reveal parallax-image"><img src={`${base}media/portrait-user.jpg`} alt="个人真人照片" loading="lazy" /><span>BEHIND THE FRAME ↗</span></div>
           <div className="about-copy"><p className="tiny accent motion-support">短视频编导 / 短视频运营</p><h2 className="motion-title">好的内容，<br />始于观察。<br /><span className="muted">也成于执行。</span></h2><p className="body-copy motion-support">我关注内容的表达，也关注内容被看见的方式。<br />从选题策划、脚本分镜到剪辑呈现，连接创意与执行，让想法成为可以被感受到的作品。</p><p className="draft-note motion-support">个人简介草稿 · 工作经历与任职时间待补充</p><a className="text-link animated-fill motion-support" href="#contact">进一步认识我 <span>↗</span></a></div>
         </div>
         <div className="stats">{[
-          { value: '04', unit: ' / FILMS', label: '本次收录作品' },
-          { value: '5', unit: ' / YEARS', label: '从业年限' },
-          { value: '100W+', unit: ' / VIEWS', label: '累计播放量' },
+          { value: '10', unit: ' / FILMS', label: '本次收录作品' },
+          { value: '4', unit: ' / YEARS', label: '从业年限' },
+          { value: '1000W+', unit: ' / VIEWS', label: '累计播放量' },
           { value: '3079301714@QQ.COM', unit: ' / CONTACT', label: '18064578010', compact: true },
         ].map(({ value, unit, label, compact }) => <div className={`motion-card${compact ? ' stat-contact' : ''}`} key={unit}><strong>{value}<span>{unit}</span></strong><p>{label}</p></div>)}</div>
       </section>
 
-      <section className="work section shell motion-section" id="work">
-        <div className="section-label"><span>02 / SELECTED WORK</span><span>精选作品 / 04</span></div>
+      <section className="work section shell motion-section cinematic-section" id="work" data-chapter="02">
+        <SectionAtmosphere cover="work-01.jpg" label="FRAME / STORY" />
+        <div className="section-label"><span>02 / SELECTED WORK</span><span>精选作品 / 10</span></div>
         <div className="section-heading"><h2 className="motion-title">让作品<span className="muted">说话。</span></h2><p className="motion-support">不同形式，相同的认真。<br />点击作品，观看完整视频。</p></div>
-        <div className="projects">{projects.map((project, i) => <article className="project motion-card" key={project.file}>
-          <button className="project-image image-reveal parallax-image" onClick={() => setSelected(i)} aria-label={`播放${project.category}`}><img src={`${base}media/${project.cover}`} alt={project.category + '作品画面'} loading="lazy" /><span className="project-index">0{i + 1} / 04</span><span className="play-icon">↗</span><span className="watch-label">WATCH FILM <span>▷</span></span></button>
-          <div className="project-meta"><span className="tiny">{project.category}</span><span>0{i + 1}</span></div><h3>{project.name}</h3><p>{project.description}</p>
+        <div className="projects">{projects.map((project, i) => <article
+          className="project motion-card"
+          key={project.file}
+          style={getFanStyle(i, projects.length)}
+        >
+          <div className="project-card">
+            <button className="project-image image-reveal parallax-image" onClick={() => setSelected(i)} aria-label={`播放${project.category}`}><img src={`${base}media/${project.cover}`} alt={project.category + '作品画面'} loading="lazy" /><span className="project-index">{String(i + 1).padStart(2, '0')} / 10</span><span className="play-icon">↗</span><span className="watch-label">WATCH FILM <span>▷</span></span></button>
+            <div className="project-meta"><span className="tiny">{project.category}</span><span>{String(i + 1).padStart(2, '0')}</span></div><h3>{project.name}</h3><p>{project.description}</p>
+          </div>
         </article>)}</div>
       </section>
 
-      <section className="expertise section shell motion-section" id="expertise">
+      <section className="expertise section shell motion-section cinematic-section" id="expertise" data-chapter="03">
+        <SectionAtmosphere cover="work-08.jpg" label="FRAME / METHOD" />
         <div className="section-label"><span>03 / WHAT I DO</span><span>我的优势</span></div>
         <div className="section-heading"><h2 className="motion-title">有想法。<br /><span className="muted">更有落地的方法。</span></h2><p className="motion-support">把内容拆解成可执行的步骤，<br />再把每个步骤，连成完整的作品。</p></div>
         <div className="abilities">{abilities.map(([id, title, description, tags]) => <article className="motion-card" key={id}><div className="ability-top"><span>{id}</span><span>↗</span></div><h3>{title}</h3><p>{description}</p><span className="ability-tags">{tags}</span></article>)}</div>
         <p className="draft-note">能力介绍为首版草稿，可根据实际项目经历调整。</p>
       </section>
 
-      <section className="contact section motion-section" id="contact"><div className="shell contact-inner">
+      <section className="contact section motion-section cinematic-section" id="contact" data-chapter="04"><div className="shell contact-inner">
         <div className="section-label"><span>04 / LET’S CONNECT</span><span>下一个好作品，从一次交流开始。</span></div>
         <p className="contact-lead motion-support">你有想法，<span className="muted">我们就有故事可讲。</span></p>
         <h2 className="motion-title">LET’S MAKE<br /><span>SOMETHING</span><br /><em>MATTER.</em><span className="contact-arrow">↗</span></h2>
