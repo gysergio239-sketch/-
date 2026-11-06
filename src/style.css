@@ -17,8 +17,8 @@
 
 /* Selected work: cinematic fan layout */
 @media(min-width:768px){
-  .projects{display:block;position:relative;min-height:clamp(430px,34vw,560px);perspective:1600px;isolation:isolate}
-  .project{position:absolute;top:0;left:41%;width:18%;padding-top:0!important;z-index:var(--fan-depth)}
+  .projects{display:block;position:relative;min-height:clamp(480px,40vw,650px);perspective:1600px;isolation:isolate}
+  .project{position:absolute;top:0;left:38.5%;width:23%;padding-top:0!important;z-index:var(--fan-depth)}
   .project-card{position:relative;padding:8px 8px 22px;background:linear-gradient(150deg,#161614 0%,#0b0b0a 70%);border:1px solid #ffffff21;box-shadow:0 30px 65px #0009;transform:translate3d(var(--fan-x),var(--fan-y),0) rotate(var(--fan-angle));transform-origin:50% 115%;transition:transform 1.05s cubic-bezier(.16,1,.3,1),box-shadow .8s cubic-bezier(.16,1,.3,1),border-color .6s ease;will-change:transform}
   .projects:hover .project-card,.projects:focus-within .project-card{transform:translate3d(var(--fan-open-x),0,0) rotate(var(--fan-open-angle));box-shadow:0 24px 50px #0008}
   .projects .project:hover,.projects .project:focus-within{z-index:10}
