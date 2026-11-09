@@ -15,6 +15,8 @@ const projects = [
   { name: 'VID_484', category: 'VIDEO / 04', file: 'work-04.mp4', cover: 'work-04.jpg', description: '短视频作品 · 原片 VID_484.mp4' },
   { name: 'VID_485', category: 'VIDEO / 05', file: 'work-05.mp4', cover: 'work-05.jpg', description: '短视频作品 · 原片 VID_485.mp4' },
   { name: '10月21日 (2)(3)', category: 'VIDEO / 06', file: 'work-06.mp4', cover: 'work-06.jpg', description: '短视频作品 · 原片 10月21日 (2)(3).mp4' },
+  { name: '10月13日', category: 'VIDEO / 07', file: 'work-07.mp4', cover: 'work-07.jpg', description: '短视频作品 · 原片 10月13日.mp4' },
+  { name: '111去去去去去去去去去去球器前期)', category: 'VIDEO / 08', file: 'work-08.mp4', cover: 'work-08-cover.jpg', description: '短视频作品 · 原片 111去去去去去去去去去去球器前期).mp4' },
 ];
 
 function getFanStyle(index, total) {
@@ -177,7 +179,7 @@ function App() {
           <div className="about-copy"><p className="tiny accent motion-support">短视频编导 / 短视频运营</p><h2 className="motion-title">好的内容，<br />始于观察。<br /><span className="muted">也成于执行。</span></h2><p className="body-copy motion-support">我关注内容的表达，也关注内容被看见的方式。<br />从选题策划、脚本分镜到剪辑呈现，连接创意与执行，让想法成为可以被感受到的作品。</p><p className="draft-note motion-support">个人简介草稿 · 工作经历与任职时间待补充</p><a className="text-link animated-fill motion-support" href="#contact">进一步认识我 <span>↗</span></a></div>
         </div>
         <div className="stats">{[
-          { value: '06', unit: ' / FILMS', label: '本次收录作品' },
+          { value: '08', unit: ' / FILMS', label: '本次收录作品' },
           { value: '4', unit: ' / YEARS', label: '从业年限' },
           { value: '1000W+', unit: ' / VIEWS', label: '累计播放量' },
           { value: '3079301714@QQ.COM', unit: ' / CONTACT', label: '18064578010', compact: true },
@@ -194,7 +196,7 @@ function App() {
           style={getFanStyle(i, projects.length)}
         >
           <div className="project-card">
-            <button className="project-image image-reveal parallax-image" onClick={() => setSelected(i)} aria-label={`播放${project.category}`}><img src={`${base}media/${project.cover}`} alt={project.category + '作品画面'} loading="lazy" /><span className="project-index">{String(i + 1).padStart(2, '0')} / 06</span><span className="play-icon">↗</span><span className="watch-label">WATCH FILM <span>▷</span></span></button>
+            <button className="project-image image-reveal parallax-image" onClick={() => setSelected(i)} aria-label={`播放${project.category}`}><img src={`${base}media/${project.cover}`} alt={project.category + '作品画面'} loading="lazy" /><span className="project-index">{String(i + 1).padStart(2, '0')} / 08</span><span className="play-icon">↗</span><span className="watch-label">WATCH FILM <span>▷</span></span></button>
             <div className="project-meta"><span className="tiny">{project.category}</span><span>{String(i + 1).padStart(2, '0')}</span></div><h3>{project.name}</h3><p>{project.description}</p>
           </div>
         </article>)}</div>
